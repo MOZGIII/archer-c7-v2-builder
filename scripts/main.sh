@@ -1,5 +1,6 @@
 #!/bin/bash
 set -xeuo pipefail
+NAME="$1"; shift
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 BUILDER_PATH="$(pwd)"
 BUILD_PATH="/build"
@@ -25,4 +26,17 @@ useradd --home-dir "$BUILD_PATH" --shell /bin/bash nonroot
 
 chown -R nonroot:nonroot "$BUILD_PATH"
 
-su nonroot --preserve-environment -c "make -j$(nproc)"
+case "$NAME" in
+  "build")
+    COMMAND=("make" "-j$(nproc)")
+    ;;
+  "debug-build")
+    COMMAND=("make" "-j1" "V=s")
+    ;;
+  *)
+    echo >&2 "Error: unknown command"
+    exit 2
+    ;;
+esac
+
+su nonroot --preserve-environment -c "${COMMAND[*]}"
