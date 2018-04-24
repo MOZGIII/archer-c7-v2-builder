@@ -5,12 +5,20 @@ DIR="$(pwd)"
 
 BUILDER_IMAGE="mozgiii/openwrt-image-builder"
 
+args=(
+  "--rm"
+  "-it"
+  "--net=host"
+  "--mount" "type=bind,source=$DIR/build,target=/build"
+  "--mount" "type=bind,source=$DIR,target=/builder,readonly"
+)
+
+if [[ "${WORKDIR:-}" != "" ]]; then
+  args+=("-w" "$WORKDIR")
+fi
+
 mkdir -p build
 docker run \
-  --rm \
-  -it \
-  --net=host \
-  --mount type=bind,source="$DIR/build",target=/build \
-  --mount type=bind,source="$DIR",target=/builder,readonly \
+  "${args[@]}" \
   "$BUILDER_IMAGE" \
   "$@"
