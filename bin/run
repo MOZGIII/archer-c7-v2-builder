@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+DIR="$(pwd)"
+
+BUILDER_IMAGE="mozgiii/openwrt-image-builder"
+
+mkdir -p build
+docker run \
+  --rm \
+  -it \
+  --net=host \
+  --mount type=bind,source="$DIR/build",target=/build \
+  --mount type=bind,source="$DIR",target=/builder,readonly \
+  "$BUILDER_IMAGE" \
+  "$@"
