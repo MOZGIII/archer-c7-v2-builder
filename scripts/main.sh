@@ -39,4 +39,4 @@ case "$NAME" in
     ;;
 esac
 
-su nonroot --preserve-environment -c "${COMMAND[*]}"
+su-exec nonroot "${COMMAND[@]}"
