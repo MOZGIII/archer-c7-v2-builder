@@ -17,6 +17,7 @@ sed "s|{root}|file://${BUILDER_PATH}/submodules|" "$BUILDER_PATH/files/feeds.con
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
+git apply /builder/files/patch/666-shortcut-fe_trunk.patch
 cp "$BUILDER_PATH/files/config.seed" "$SOURCE_PATH/.config"
 
 make defconfig
