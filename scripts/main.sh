@@ -14,6 +14,9 @@ pushd "$SOURCE_PATH"
 
 sed "s|{root}|file://${BUILDER_PATH}/submodules|" "$BUILDER_PATH/files/feeds.conf.template" > "$SOURCE_PATH/feeds.conf"
 
+# Downgrade kernel to 4.14 from 4.19.
+sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=4.14/' ./target/linux/ath79/Makefile
+
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
