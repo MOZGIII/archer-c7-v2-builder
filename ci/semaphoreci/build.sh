@@ -6,4 +6,5 @@ if [[ "${SEMAPHORE:-}" != "true" ]]; then
   exit 1
 fi
 
+export BUILD_CFG_LOW_SPACE=true
 bin/build
