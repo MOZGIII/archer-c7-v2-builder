@@ -24,6 +24,7 @@ if [[ "${WORKDIR:-}" != "" ]]; then
 fi
 
 mkdir -p build
+set -x
 docker run \
   "${ARGS[@]}" \
   "$BUILDER_IMAGE" \
