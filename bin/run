@@ -15,8 +15,8 @@ ARGS=(
   "--mount" "type=bind,source=$DIR,target=/builder,readonly"
 )
 
-for env_var in "${ENV_VARS[@]}"; do
-  ARGS+=( "--env" "$env_var" )
+for ENV_VAR in "${ENV_VARS[@]}"; do
+  ARGS+=( "--env" "$ENV_VAR" )
 done
 
 if [[ -n "${WORKDIR:-}" ]]; then
