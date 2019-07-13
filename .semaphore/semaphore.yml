@@ -23,6 +23,18 @@ blocks:
             - .semaphore/prepare-free-space.sh
             - export BUILD_CFG_LOW_SPACE=true
             - env
+            # Restore the download dir from cache.
+            - cache restore dl_dir
+            # Force set the priviles to the state it's in after the
+            # `make download` invocation.
+            - sudo chown -R "0:0" "build/dl" || true
+            # Run build process up until the download step.
+            - BUILD_CFG_EXIT_AFTER=download bin/build
+            # Store download dir in cache; we have to change the owner,
+            # otherwise files are not accessible to the cache command; we are
+            # losing the file permissions data during that operation.
+            - sudo chown -R "$(whoami):$(whoami)" "build/dl" && cache store dl_dir "build/dl"
+            # Perform the real build.
             - bin/build
             - df -h
             - .semaphore/upload.sh "build/bin"
