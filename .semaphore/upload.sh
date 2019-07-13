@@ -8,6 +8,9 @@ CONTENT_PATH="$1"; shift
 # Compute branch name.
 BRANCH_NAME="${BRANCH_PREFIX}$(date --iso=minute --utc)"
 
+# Expand private key path before changing directory.
+GIT_PRIVATE_KEY_PATH="$(realpath "$GIT_PRIVATE_KEY_PATH")"
+
 cd "$CONTENT_PATH"
 git init .
 git remote add repo "$GIT_REPO_URL"
