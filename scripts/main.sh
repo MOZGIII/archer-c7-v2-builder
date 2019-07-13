@@ -20,10 +20,7 @@ sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=4.14/' ./target/linux/ath79/Mak
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
-cp "$BUILDER_PATH/files/config.seed" "$SOURCE_PATH/.config"
-if [[ "${BUILD_CFG_LOW_SPACE:-"false"}" == "true" ]]; then
-  cat "$BUILDER_PATH/files/config.seed.low-space" >> "$SOURCE_PATH/.config"
-fi
+"$BUILDER_PATH/scripts/mkconfig.sh" > "$SOURCE_PATH/.config"
 
 make defconfig
 make download
