@@ -29,12 +29,20 @@ useradd --home-dir "$BUILD_PATH" --shell /bin/bash nonroot
 
 chown -R nonroot:nonroot "$BUILD_PATH"
 
+make_args() {
+  if [[ -n "${BUILD_CFG_IGNORE_ERRORS:-}" ]]; then
+    COMMAND+=( "IGNORE_ERRORS=$BUILD_CFG_IGNORE_ERRORS" )
+  fi
+}
+
 case "$NAME" in
   "build")
-    COMMAND=("make" "-j$(nproc)" "IGNORE_ERRORS=m")
+    COMMAND=( "make" "-j$(nproc)" )
+    make_args
     ;;
   "debug-build")
-    COMMAND=("make" "-j1" "V=s")
+    COMMAND=( "make" "-j1" "V=s" )
+    make_args
     ;;
   *)
     echo >&2 "Error: unknown command"
