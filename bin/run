@@ -3,9 +3,9 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 DIR="$(pwd)"
 
-BUILDER_IMAGE="${BUILDER_IMAGE:-"mozgiii/openwrt-image-builder"}"
-
 ENV_VARS=( "${!BUILDER_@}" )
+
+BUILDER_IMAGE="${BUILDER_IMAGE:-"mozgiii/openwrt-image-builder"}"
 
 ARGS=(
   "--rm"
