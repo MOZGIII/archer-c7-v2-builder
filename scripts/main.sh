@@ -34,7 +34,7 @@ chown -R nonroot:nonroot "$BUILD_PATH"
 
 case "$NAME" in
   "build")
-    COMMAND=("make" "-j$(nproc)" "V=99" "IGNORE_ERRORS=m")
+    COMMAND=("make" "-j$(nproc)" "IGNORE_ERRORS=m")
     ;;
   "debug-build")
     COMMAND=("make" "-j1" "V=s")
