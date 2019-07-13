@@ -5,7 +5,9 @@ DIR="$(pwd)"
 
 BUILDER_IMAGE="mozgiii/openwrt-image-builder"
 
-args=(
+ENV_VARS=( "${!BUILDER_@}" )
+
+ARGS=(
   "--rm"
   "-it"
   "--net=host"
@@ -13,12 +15,16 @@ args=(
   "--mount" "type=bind,source=$DIR,target=/builder,readonly"
 )
 
+for env_var in "${ENV_VARS[@]}"; do
+  ARGS+=( "--env" "$env_var" )
+done
+
 if [[ "${WORKDIR:-}" != "" ]]; then
-  args+=("-w" "$WORKDIR")
+  ARGS+=("-w" "$WORKDIR")
 fi
 
 mkdir -p build
 docker run \
-  "${args[@]}" \
+  "${ARGS[@]}" \
   "$BUILDER_IMAGE" \
   "$@"
