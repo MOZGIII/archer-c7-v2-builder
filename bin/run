@@ -19,8 +19,8 @@ for env_var in "${ENV_VARS[@]}"; do
   ARGS+=( "--env" "$env_var" )
 done
 
-if [[ "${WORKDIR:-}" != "" ]]; then
-  ARGS+=("-w" "$WORKDIR")
+if [[ -n "${WORKDIR:-}" ]]; then
+  ARGS+=( "-w" "$WORKDIR" )
 fi
 
 mkdir -p build
