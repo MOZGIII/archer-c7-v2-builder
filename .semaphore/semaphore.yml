@@ -18,5 +18,6 @@ blocks:
             - ls -alh
             - .semaphore/prepare-free-space.sh
             - export BUILD_CFG_LOW_SPACE=true
+            - env
             - bin/build
             - df -h
