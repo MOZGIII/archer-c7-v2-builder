@@ -1,0 +1,22 @@
+version: v1.0
+name: Build image
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Main
+    task:
+      jobs:
+        - name: Run
+          commands:
+            - df -h
+            - free -m
+            - nproc
+            - checkout
+            - git submodule update --init
+            - ls -alh
+            - .semaphore/prepare-free-space.sh
+            - export BUILD_CFG_LOW_SPACE=true
+            - bin/build
+            - df -h

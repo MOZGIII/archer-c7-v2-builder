@@ -24,9 +24,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y purge \
   '^postgresql-.*' \
   rabbitmq-server \
   '^mysql-.*' \
-  rethinkdb \
-  elasticsearch \
-  '^mongodb-org.*' \
   '^apache2.*' \
   '^php.*' \
   firefox \
