@@ -10,8 +10,7 @@ BINARY_FOLDER="$BUILD_PATH/bin"
 
 # Clone source from our submodules if it's not ready.
 if [[ ! -d "$SOURCE_PATH" ]]; then
-  cd "$BUILD_PATH"
-  clone-source "file://$BUILDER_PATH/submodules/source" --depth 1
+  git clone "file://$BUILDER_PATH/submodules/source" "$SOURCE_PATH" --depth 1
 fi
 
 # Go over to the source dir.
