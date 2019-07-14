@@ -1,4 +1,5 @@
 #!/bin/bash
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
-exec bin/run /builder/scripts/main.sh debug-build
+export BUILD_CFG_BUILD_DEBUGGING=true
+exec bin/run /builder/scripts/main.sh
