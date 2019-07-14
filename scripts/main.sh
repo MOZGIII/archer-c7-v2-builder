@@ -8,6 +8,14 @@ SOURCE_PATH="$BUILD_PATH/source"
 DOWNLOAD_FOLDER="$BUILD_PATH/dl"
 BINARY_FOLDER="$BUILD_PATH/bin"
 
+check_exit_point() {
+  CURRENT_POINT="$1" ; shift
+  if [[ "${BUILD_CFG_EXIT_AFTER:-}" == "$CURRENT_POINT" ]]; then
+    echo "Reached exit point $CURRENT_POINT and exiting as requested..." >&2
+    exit 1
+  fi
+}
+
 # Clone source from our submodules if it's not ready.
 if [[ ! -d "$SOURCE_PATH" ]]; then
   git clone "file://$BUILDER_PATH/submodules/source" "$SOURCE_PATH" --depth 1
@@ -35,8 +43,14 @@ sed "s|{root}|file://${BUILDER_PATH}/submodules|" "$BUILDER_PATH/files/feeds.con
 # Expand configuration.
 make defconfig
 
+# Exit here if requested - can be used to inflate the download cache.
+check_exit_point "config"
+
 # Download package sources and other dependencies.
 make download "-j$(nproc)"
+
+# Exit here if requested - can be used to capture the download cache.
+check_exit_point "download"
 
 # Prepare a non-root user to run as.
 useradd --home-dir "$BUILD_PATH" --shell /bin/bash nonroot
