@@ -23,4 +23,4 @@ blocks:
             - env
             - bin/build
             - df -h
-            - .semaphore/upload.sh "build/source/bin"
+            - .semaphore/upload.sh "build/bin"
