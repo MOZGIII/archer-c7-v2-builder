@@ -20,7 +20,7 @@ cd "$SOURCE_PATH"
 sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=4.14/' ./target/linux/ath79/Makefile
 
 # Configure feeds to use our submodules.
-sed "s|{root}|file://${BUILDER_PATH}/submodules|" "$BUILDER_PATH/files/feeds.conf.template" > "$SOURCE_PATH/feeds.conf"
+sed "s|{root}|file://${BUILDER_PATH}/submodules|" "$BUILDER_PATH/files/feeds.conf.template" > ./feeds.conf
 
 # Update and install feeds.
 ./scripts/feeds update -a
@@ -29,7 +29,7 @@ sed "s|{root}|file://${BUILDER_PATH}/submodules|" "$BUILDER_PATH/files/feeds.con
 # Customize build with our configuration.
 (
   export DOWNLOAD_FOLDER BINARY_FOLDER
-  "$BUILDER_PATH/scripts/mkconfig.sh" > .config
+  "$BUILDER_PATH/scripts/mkconfig.sh" > ./.config
 )
 
 # Expand configuration.
