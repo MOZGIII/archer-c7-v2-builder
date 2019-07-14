@@ -5,6 +5,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 BUILDER_PATH="$(pwd)"
 BUILD_PATH="/build"
 SOURCE_PATH="$BUILD_PATH/source"
+DOWNLOAD_FOLDER="$BUILD_PATH/dl"
+BINARY_FOLDER="$BUILD_PATH/bin"
 
 pushd "$BUILD_PATH"
 
@@ -20,7 +22,10 @@ sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=4.14/' ./target/linux/ath79/Mak
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
-"$BUILDER_PATH/scripts/mkconfig.sh" > .config
+(
+  export DOWNLOAD_FOLDER BINARY_FOLDER
+  "$BUILDER_PATH/scripts/mkconfig.sh" > .config
+)
 
 make defconfig
 make download
