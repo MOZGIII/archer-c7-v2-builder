@@ -7,6 +7,7 @@ CONFIG_TARGET_ath79_generic=y
 CONFIG_TARGET_ath79_generic_DEVICE_tplink_archer-c7-v2=y
 CONFIG_DEVEL=y
 CONFIG_PACKAGE_libustream-mbedtls=y
+CONFIG_DOWNLOAD_FOLDER="../dl"
 CFG
 
 if [[ "${BUILD_CFG_BUILD_ALL_PACKAGES:-}" == "true" ]]; then
