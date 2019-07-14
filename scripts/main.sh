@@ -28,7 +28,7 @@ sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=4.14/' ./target/linux/ath79/Mak
 )
 
 make defconfig
-make download
+make download "-j$(nproc)"
 
 useradd --home-dir "$BUILD_PATH" --shell /bin/bash nonroot
 
