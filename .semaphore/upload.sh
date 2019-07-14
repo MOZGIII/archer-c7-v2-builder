@@ -19,6 +19,6 @@ git init .
 git remote add repo "$GIT_REPO_URL"
 git checkout -b "$BRANCH_NAME"
 git add -A
-git commit -m "Automatic build"
+git commit -m "Automatic build for commit $SEMAPHORE_GIT_REF"
 
 GIT_SSH_COMMAND="ssh -i ${GIT_PRIVATE_KEY_PATH}" git push repo "$BRANCH_NAME"
