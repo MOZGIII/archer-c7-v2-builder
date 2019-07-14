@@ -24,6 +24,6 @@ git config user.email "semaphore-ci@localhost"
 git config user.name "Semaphore CI"
 git checkout -b "$BRANCH_NAME"
 git add -A
-git commit -m "Automatic build for commit $SEMAPHORE_GIT_REF"
+git commit -m "Automatic build for commit $SEMAPHORE_GIT_SHA"
 
 GIT_SSH_COMMAND="ssh -i ${GIT_PRIVATE_KEY_PATH}" git push repo "$BRANCH_NAME"
