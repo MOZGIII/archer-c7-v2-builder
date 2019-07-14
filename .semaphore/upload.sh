@@ -11,6 +11,9 @@ BRANCH_NAME="${BRANCH_PREFIX}$(date --iso=date --utc)-${SEMAPHORE_JOB_ID}"
 # Expand private key path before changing directory.
 GIT_PRIVATE_KEY_PATH="$(realpath "$GIT_PRIVATE_KEY_PATH")"
 
+# Chmod the private key so git doesn't complain.
+sudo chmod 0600 "$GIT_PRIVATE_KEY_PATH"
+
 OWNER="$(whoami)"
 
 cd "$CONTENT_PATH"
