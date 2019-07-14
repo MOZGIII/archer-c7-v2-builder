@@ -20,7 +20,7 @@ sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=4.14/' ./target/linux/ath79/Mak
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
-"$BUILDER_PATH/scripts/mkconfig.sh" > "$SOURCE_PATH/.config"
+"$BUILDER_PATH/scripts/mkconfig.sh" > .config
 
 make defconfig
 make download
