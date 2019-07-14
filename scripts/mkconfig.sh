@@ -18,3 +18,5 @@ fi
 
 [[ "${BUILD_CFG_LOW_SPACE:-"false"}" == "true" ]] && \
   echo "CONFIG_DEVEL_AUTOREMOVE=y"
+
+echo "Config generated!" >&2
