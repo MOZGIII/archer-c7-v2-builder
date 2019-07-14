@@ -17,6 +17,8 @@ cd "$CONTENT_PATH"
 sudo chown -R "$OWNER:$OWNER" .
 git init .
 git remote add repo "$GIT_REPO_URL"
+git config user.email "semaphore-ci@localhost"
+git config user.name "Semaphore CI"
 git checkout -b "$BRANCH_NAME"
 git add -A
 git commit -m "Automatic build for commit $SEMAPHORE_GIT_REF"
