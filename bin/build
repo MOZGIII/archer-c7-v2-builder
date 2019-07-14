@@ -1,4 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+for PROFILE in ${PROFILES:-}; do
+  set -a
+	# shellcheck disable=SC1090
+  . "profiles/$PROFILE"
+  set +a
+done
+
 exec bin/run /builder/scripts/main.sh
