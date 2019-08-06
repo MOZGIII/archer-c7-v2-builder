@@ -24,8 +24,8 @@ fi
 # Go over to the source dir.
 cd "$SOURCE_PATH"
 
-# Once sources are ready, downgrade kernel to 4.14 from 4.19.
-sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=4.14/' ./target/linux/ath79/Makefile
+# Apply fix for offload patches.
+patch --forward -r - -s -p0 target/linux/generic/hack-4.19/650-netfilter-add-xt_OFFLOAD-target.patch < "$BUILDER_PATH/files/patches/target_linux_generic_hack-4.19_650-netfilter-add-xt_OFFLOAD-target.patch" || true
 
 # Configure feeds to use our submodules.
 sed "s|{root}|file://${BUILDER_PATH}/submodules|" "$BUILDER_PATH/files/feeds.conf.template" > ./feeds.conf

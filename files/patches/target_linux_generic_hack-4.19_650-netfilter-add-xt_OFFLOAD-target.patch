@@ -1,0 +1,13 @@
+--- target/linux/generic/hack-4.19/650-netfilter-add-xt_OFFLOAD-target.patch	2019-08-06 15:22:34.240023913 +0200
++++ 0001-netfilter-add-xt_OFFLOAD-target.patch	2019-08-06 15:23:02.132036224 +0200
+@@ -321,8 +377,8 @@
+ +{
+ +	struct dst_entry *this_dst, *other_dst;
+ +
+-+	this_dst = xt_flowoffload_dst(ct, dir, par);
+-+	other_dst = xt_flowoffload_dst(ct, !dir, par);
+++	this_dst = skb_dst(skb);
+++	other_dst = xt_flowoffload_dst(ct, dir, par);
+ +	if (!this_dst || !other_dst)
+ +		return -ENOENT;
+ +
