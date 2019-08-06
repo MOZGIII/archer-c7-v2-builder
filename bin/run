@@ -3,6 +3,9 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 DIR="$(pwd)"
 
+export BUILD_CFG_BUILDER_PATH="/builder"
+export BUILD_CFG_BUILD_PATH="/build"
+
 ENV_VARS=( "${!BUILD_CFG_@}" )
 
 BUILDER_IMAGE="${BUILDER_IMAGE:-"mozgiii/openwrt-image-builder"}"
@@ -11,8 +14,8 @@ ARGS=(
   "--rm"
   "-it"
   "--net=host"
-  "--mount" "type=bind,source=$DIR/build,target=/build"
-  "--mount" "type=bind,source=$DIR,target=/builder,readonly"
+  "--mount" "type=bind,source=$DIR/build,target=$BUILD_CFG_BUILD_PATH"
+  "--mount" "type=bind,source=$DIR,target=$BUILD_CFG_BUILDER_PATH,readonly"
 )
 
 for ENV_VAR in "${ENV_VARS[@]}"; do
