@@ -3,6 +3,11 @@ set -euo pipefail
 
 pwd
 
+if [[ -e ".git" ]]; then
+  echo ".git already exists, aborting..."
+  exit 1
+fi
+
 set -x
 git init .
 git checkout -b "$BUILD_CFG_BRANCH"
