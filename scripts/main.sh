@@ -55,8 +55,8 @@ execute_step() {
       write_step "config"
       ;;
     "config")
-      # Once sources are ready, downgrade kernel to 4.14 from 4.19.
-      sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=4.14/' ./target/linux/ath79/Makefile
+      # Copy patch to openwrt.
+      cp "$BUILDER_PATH/files/670-netfilter-swap-iifidx-and-oifidx.patch" ./target/linux/generic/hack-4.19
 
       # Configure feeds to use our submodules.
       sed "s|{root}|file://${BUILDER_PATH}/submodules|" "$BUILDER_PATH/files/feeds.conf.template" > ./feeds.conf
