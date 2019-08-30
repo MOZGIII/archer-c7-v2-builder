@@ -12,7 +12,7 @@ check_exit_point() {
   CURRENT_POINT="$1" ; shift
   if [[ "${BUILD_CFG_EXIT_AFTER:-}" == "$CURRENT_POINT" ]]; then
     echo "Reached exit point $CURRENT_POINT and exiting as requested..." >&2
-    exit 1
+    exit 0
   fi
 }
 
