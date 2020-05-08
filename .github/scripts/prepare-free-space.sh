@@ -12,48 +12,27 @@ if [[ "${CI:-}" != "true" ]]; then
   exit 1
 fi
 
+set -x
+
 # Measure initally available space.
 df -h
 
 # Remove packages to save up some space.
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y purge \
-  build-essential \
-  '^postgresql-.*' \
-  rabbitmq-server \
-  '^mysql-.*' \
-  '^apache2.*' \
-  '^php.*' \
-  firefox \
-  google-chrome-stable \
-  ansible \
-  '^gradle.*' \
-  '^erlang.*' \
-  '^redis.*' \
-  memcached \
-  yarn \
-  cassandra \
-  '^oracle-.*' \
-  '^openj.*' \
-  '^java.*' \
-  sbt
+export DEBIAN_FRONTEND=noninteractive
+sudo apt-get install -y aptitude ubuntu-minimal
+sudo aptitude markauto -y '~i!~M!~prequired!~pimportant!~R~prequired!~R~R~prequired!~R~pimportant!~R~R~pimportant!busybox!grub!initramfs-tools'
+sudo aptitude hold -y moby-engine moby-cli
+sudo aptitude purge -y '~c'
+sudo apt-get --purge autoremove
+sudo apt-get clean
 
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y autoremove
+# Remove /opt and /usr/local.
+du -h -d 1 /opt /usr/local
+sudo rm -rf /opt/* /usr/local/*
 
-# Remove /opt.
-sudo rm -rf /opt/*
-
-# Clean up home dir.
-sudo rm -rf \
-  ~/.rbenv \
-  ~/.phpbrew \
-  ~/.gem \
-  ~/.sbt \
-  ~/.kern \
-  ~/.kiex \
-  ~/.pyenv \
-  ~/.npm \
-  ~/.nvm \
-  ~/.lien
+# Remove docker images.
+mapfile -t DOCKER_IMAGES < <(docker image ls -q)
+docker image rm "${DOCKER_IMAGES[@]}"
 
 # Measure space available for the build.
 df -h
