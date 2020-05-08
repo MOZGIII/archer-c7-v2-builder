@@ -7,10 +7,12 @@ if [[ "$#" -lt 1 ]]; then
   exit 1
 fi
 
-export BUILD_CFG_BRANCH="$1"; shift
+export BUILD_CFG_BRANCH="$1"
+shift
 
 if [[ "$#" -ge 1 ]]; then
-  export BUILD_CFG_COMMIT_MSG="$1"; shift
+  export BUILD_CFG_COMMIT_MSG="$1"
+  shift
 else
   GIT_SHA="$(git rev-parse HEAD)"
   export BUILD_CFG_COMMIT_MSG="Build for commit $GIT_SHA"

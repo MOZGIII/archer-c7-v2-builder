@@ -19,7 +19,8 @@ else
   echo "CONFIG_ALL_NONSHARED=y"
 fi
 
-[[ "${BUILD_CFG_LOW_SPACE:-"false"}" == "true" ]] &&
+if [[ "${BUILD_CFG_LOW_SPACE:-"false"}" == "true" ]]; then
   echo "CONFIG_DEVEL_AUTOREMOVE=y"
+fi
 
 echo "Config generated!" >&2
