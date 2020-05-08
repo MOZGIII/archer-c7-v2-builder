@@ -9,6 +9,7 @@ CONFIG_DEVEL=y
 CONFIG_PACKAGE_libustream-mbedtls=y
 CONFIG_DOWNLOAD_FOLDER="${DOWNLOAD_FOLDER:-}"
 CONFIG_BINARY_FOLDER="${BINARY_FOLDER:-}"
+CONFIG_TESTING_KERNEL=y
 CFG
 
 if [[ "${BUILD_CFG_BUILD_ALL_PACKAGES:-}" == "true" ]]; then
@@ -18,7 +19,7 @@ else
   echo "CONFIG_ALL_NONSHARED=y"
 fi
 
-[[ "${BUILD_CFG_LOW_SPACE:-"false"}" == "true" ]] && \
+[[ "${BUILD_CFG_LOW_SPACE:-"false"}" == "true" ]] &&
   echo "CONFIG_DEVEL_AUTOREMOVE=y"
 
 echo "Config generated!" >&2
