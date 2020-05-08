@@ -26,3 +26,9 @@ jobs:
       - run: df -h
       - run: bin/build
       - run: df -h
+      - name: Upload the artifacts
+        run: .github/scripts/upload.sh "build/bin"
+        env:
+          GIT_REPO_URL: ${{ secrets.GIT_REPO_URL }}
+          GIT_PRIVATE_KEY: ${{ secrets.GIT_PRIVATE_KEY }}
+      - run: df -h
