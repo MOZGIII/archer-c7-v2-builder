@@ -1,0 +1,28 @@
+name: build
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_CFG_LOW_SPACE: "true"
+    steps:
+      - name: Display build env info
+        run: |
+          set -x
+          df -h
+          free -m
+          nproc
+          env
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - run: df -h
+      - name: Prepare free space
+        run: .github/scripts/prepare-free-space.sh
+      - run: df -h
+      - run: bin/build
+      - run: df -h
