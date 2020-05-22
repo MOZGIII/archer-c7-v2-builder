@@ -5,6 +5,7 @@ on:
 
 jobs:
   build:
+    if: github.event.repository.owner.id == github.event.sender.id
     runs-on: ubuntu-latest
     timeout-minutes: 600
     env:
