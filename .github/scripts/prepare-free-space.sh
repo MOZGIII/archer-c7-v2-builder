@@ -2,7 +2,7 @@
 set -euo pipefail
 # This script takes care of clearing out unneeded stuff from the system to get
 # us some extra space on Github Actions VM.
-# It is safe to run in CI because it looks like a new fresh VM is created from
+# It is safe to run in CI because it looks like a new fresh VM is created for
 # every build from a snapshot, and the disposed after the build is finished.
 
 # Do not run it locally because it will probably break your system.
