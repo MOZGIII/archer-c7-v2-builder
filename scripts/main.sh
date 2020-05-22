@@ -80,16 +80,6 @@ execute_step() {
     make download "-j$(nproc)"
 
     # Schedule next execution step.
-    write_step "prebuild"
-    ;;
-  "prebuild")
-    # Prepare a non-root user to run as.
-    useradd --home-dir "$BUILD_PATH" --shell /bin/bash nonroot
-
-    # Prepare build path for running as non-root.
-    chown -R nonroot:nonroot "$BUILD_PATH"
-
-    # Schedule next execution step.
     write_step "build"
     ;;
   "build")
@@ -109,7 +99,7 @@ execute_step() {
     fi
 
     # Invoke make.
-    su-exec nonroot "${MAKE_INVOCATION[@]}"
+    "${MAKE_INVOCATION[@]}"
 
     # Schedule next execution step.
     write_step "done"
