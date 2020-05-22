@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 600
     env:
       BUILD_CFG_LOW_SPACE: "true"
       BUILD_CFG_BUILD_ALL_PACKAGES: "true"
