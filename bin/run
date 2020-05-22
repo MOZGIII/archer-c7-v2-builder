@@ -19,6 +19,7 @@ ARGS=(
   "--mount" "type=bind,source=$DIR/build,target=$BUILD_CFG_BUILD_PATH"
   "--mount" "type=bind,source=$DIR,target=$BUILD_CFG_BUILDER_PATH,readonly"
   "--user" "$CUID:$CGID"
+  "--init"
 )
 
 for ENV_VAR in "${ENV_VARS[@]}"; do
