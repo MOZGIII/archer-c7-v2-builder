@@ -20,9 +20,18 @@ jobs:
           nproc
           env
       - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          submodules: true
+        run: |
+          set -x
+          mkdir -p "$GITHUB_WORKSPACE"
+          cd "$GITHUB_WORKSPACE"
+          git init .
+          git remote add origin "https://github.com/$GITHUB_REPOSITORY.git"
+          git config --local gc.auto 0
+          git fetch --no-tags --depth=1 origin "$GITHUB_REF"
+          git checkout -f -B build FETCH_HEAD
+          git submodule sync --recursive
+          git submodule foreach --recursive 'git config --local gc.auto 0'
+          git submodule update --init --force --recursive --depth=1
       - run: df -h
       - name: Prepare free space
         run: .github/scripts/prepare-free-space.sh
