@@ -23,6 +23,7 @@ blocks:
             - .semaphore/prepare-free-space.sh
             - export BUILD_CFG_LOW_SPACE=true
             - export BUILD_CFG_BUILD_ALL_PACKAGES=true
+            - export BUILD_CFG_IGNORE_ERRORS=true
             - env
             # Restore the download dir from cache.
             - cache restore dl_dir
