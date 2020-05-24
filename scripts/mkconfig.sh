@@ -20,7 +20,6 @@ else
 fi
 
 if [[ "${BUILD_CFG_LOW_SPACE:-"false"}" == "true" ]]; then
-  echo "CONFIG_DEVEL_AUTOREMOVE=y"
   echo "CONFIG_AUTOREMOVE=y"
 fi
 
