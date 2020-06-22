@@ -20,6 +20,7 @@ ARGS=(
   "--mount" "type=bind,source=$DIR,target=$BUILD_CFG_BUILDER_PATH,readonly"
   "--user" "$CUID:$CGID"
   "--init"
+  "--ulimit" "stack=838860800:838860800"
 )
 
 for ENV_VAR in "${ENV_VARS[@]}"; do
