@@ -31,7 +31,7 @@ if [[ -n "${WORKDIR:-}" ]]; then
   ARGS+=("-w" "$WORKDIR")
 fi
 
-mkdir -p build
+mkdir -p "$DIR/build"
 set -x
 docker run \
   "${ARGS[@]}" \
