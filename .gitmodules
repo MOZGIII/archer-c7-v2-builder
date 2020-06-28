@@ -7,9 +7,3 @@
 [submodule "luci"]
 	path = submodules/luci
 	url = https://github.com/openwrt/luci.git
-[submodule "routing"]
-	path = submodules/routing
-	url = https://github.com/openwrt-routing/packages.git
-[submodule "telephony"]
-	path = submodules/telephony
-	url = https://github.com/openwrt/telephony.git
