@@ -11,8 +11,8 @@ export BUILD_CFG_BUILD_PATH="/build"
 ENV_VARS=("${!BUILD_CFG_@}")
 
 BUILDER_IMAGE="${BUILDER_IMAGE:-"mozgiii/openwrt-image-builder"}"
-ULIMIT_STACK="1073741824"
-ULIMIT_NOFILE="1024000"
+ULIMIT_STACK="$((64 * 1024 * 1024))"
+ULIMIT_NOFILE="$((1000 * 1024))"
 
 ARGS=(
   "--rm"
