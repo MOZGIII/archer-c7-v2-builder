@@ -9,8 +9,8 @@ DOWNLOAD_FOLDER="$BUILD_PATH/dl"
 BINARY_FOLDER="$BUILD_PATH/bin"
 STEP_FILE_PATH="$BUILD_PATH/step"
 
-ulimit -s
-ulimit -n
+ulimit -a
+xargs --show-limits </dev/null
 
 check_exit_point() {
   local CURRENT_POINT="$1"
