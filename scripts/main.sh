@@ -9,6 +9,9 @@ DOWNLOAD_FOLDER="$BUILD_PATH/dl"
 BINARY_FOLDER="$BUILD_PATH/bin"
 STEP_FILE_PATH="$BUILD_PATH/step"
 
+ulimit -s
+ulimit -n
+
 check_exit_point() {
   local CURRENT_POINT="$1"
   shift
