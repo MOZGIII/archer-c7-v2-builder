@@ -34,6 +34,10 @@ if [[ -n "${WORKDIR:-}" ]]; then
   ARGS+=("-w" "$WORKDIR")
 fi
 
+if [[ "${RUN_REQUEST_TTY:-}" == "true" ]]; then
+  ARGS+=("-t")
+fi
+
 mkdir -p "$DIR/build"
 set -x
 docker run \

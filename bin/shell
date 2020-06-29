@@ -1,4 +1,5 @@
 #!/bin/bash
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
+export RUN_REQUEST_TTY=true
 exec bin/run /bin/bash
