@@ -34,7 +34,13 @@ if [[ -n "${WORKDIR:-}" ]]; then
   ARGS+=("-w" "$WORKDIR")
 fi
 
-if [[ "${RUN_REQUEST_TTY:-}" == "true" ]]; then
+if [ -t 1 ]; then
+  RUN_TTY_DETECTED="true"
+else
+  RUN_TTY_DETECTED="false"
+fi
+
+if [[ "${RUN_REQUEST_TTY:-"$RUN_TTY_DETECTED"}" == "true" ]]; then
   ARGS+=("-t")
 fi
 
